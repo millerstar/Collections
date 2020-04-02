@@ -5,6 +5,12 @@ import java.io.IOException;
 
 public class WorldPlay {
 
+    public static String emphasize(String phrase, char ch) {
+        String finalString = null;
+        finalString = replaceVowels(phrase, ch);
+        return finalString;
+    }
+
     public static boolean isVowel(char ch) {
         boolean isVowel;
         switch (Character.toLowerCase(ch)) {
@@ -23,7 +29,18 @@ public class WorldPlay {
 
     public static String replaceVowels(String phrase, char ch) {
         StringBuilder newPhrase = new StringBuilder();
-
+        for (int j = 0; j < phrase.length(); j++) {
+            if (!isVowel(phrase.charAt(j))) {
+                newPhrase.append(phrase.charAt(j));
+            } else {
+                // newPhrase.append(ch);
+                if (j % 2 == 0) {
+                    newPhrase.append('*');
+                } else {
+                    newPhrase.append('+');
+                }
+            }
+        }
         return newPhrase.toString();
     }
 
@@ -38,11 +55,5 @@ public class WorldPlay {
             stringBuilder.append(currentChar);
         }
         return stringBuilder.toString();
-    }
-
-    public static void main(String[] args) throws IOException {
-//        System.out.println(getFileString());
-        System.out.println(isVowel('o'));
-
     }
 }
