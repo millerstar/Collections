@@ -1,9 +1,11 @@
 package com.coursera.caesarcipher;
 
-import java.io.FileInputStream;
+import com.coursera.utils.FileManager;
+
 import java.io.IOException;
 
 public class WorldPlay {
+    public static final String FILE_PATH = "src/main/resources/world_play_file.txt";
 
     public static String emphasize(String phrase, char ch) {
         String finalString = null;
@@ -44,16 +46,12 @@ public class WorldPlay {
         return newPhrase.toString();
     }
 
-    public static String getFileString() throws IOException {
-        FileInputStream fileInputStream;
-        fileInputStream = new FileInputStream("src/main/resources/world_play_file.txt");
 
-        int i = 0;
-        StringBuilder stringBuilder = new StringBuilder();
-        while ((i = fileInputStream.read()) != -1) {
-            char currentChar = (char) i;
-            stringBuilder.append(currentChar);
-        }
-        return stringBuilder.toString();
+    public static void main(String[] args) throws IOException {
+        String myString = FileManager.getFileString(FILE_PATH);
+        System.out.println(emphasize(myString, '@'));
     }
+
+
+
 }
