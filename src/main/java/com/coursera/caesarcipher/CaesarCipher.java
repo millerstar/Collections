@@ -31,6 +31,8 @@ public class CaesarCipher {
                 encryptText.append(' ');
             } else if (input.charAt(i) == '!') {
                 encryptText.append('!');
+            } else if (input.charAt(i) == '.') {
+                encryptText.append('.');
             } else {
                 int temp;
                 if (Character.isUpperCase(input.charAt(i))) {
@@ -58,6 +60,8 @@ public class CaesarCipher {
                 encryptText.append(' ');
             } else if (input.charAt(i) == '!') {
                 encryptText.append('!');
+            } else if (input.charAt(i) == '.') {
+                encryptText.append('.');
             } else {
                 int temp = 0;
                 if (Character.isUpperCase(input.charAt(i))) {
@@ -87,8 +91,8 @@ public class CaesarCipher {
 
 
     public static void main(String[] args) throws IOException {
-        System.out.println(encrypt("First Legion", 17));
-        System.out.println(encryptTwoKeys("First Legion",23, 17));
+        System.out.println(encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
+        System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
         testCaesar();
 
     }
