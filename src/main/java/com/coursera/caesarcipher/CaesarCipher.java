@@ -25,7 +25,7 @@ public class CaesarCipher {
     public static String encrypt(String input, int key) {
         String alphaBeta = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder encryptText = new StringBuilder();
-        String encriptedString = getShiftedString(key);
+        String encryptedString = getShiftedString(key);
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == ' ') {
                 encryptText.append(' ');
@@ -35,20 +35,62 @@ public class CaesarCipher {
                 int temp;
                 if (Character.isUpperCase(input.charAt(i))) {
                     temp = alphaBeta.indexOf(input.charAt(i));
-                    encryptText.append(encriptedString.charAt(temp));
+                    encryptText.append(encryptedString.charAt(temp));
                 } else {
                     temp = alphaBeta.indexOf(Character.toUpperCase(input.charAt(i)));
-                    encryptText.append(Character.toLowerCase(encriptedString.charAt(temp)));
+                    encryptText.append(Character.toLowerCase(encryptedString.charAt(temp)));
                 }
             }
         }
         return encryptText.toString();
     }
 
+    public static String encryptTwoKeys(String input, int key1, int key2) {
+        String alphaBeta = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder encryptText = new StringBuilder();
+        String encryptedStringKey1 = getShiftedString(key1);
+        String encryptedStringKey2 = getShiftedString(key2);
+
+        for (int i = 0; i < input.length(); i++) {
+            int tempCounter = i;
+            tempCounter++;
+            if (input.charAt(i) == ' ') {
+                encryptText.append(' ');
+            } else if (input.charAt(i) == '!') {
+                encryptText.append('!');
+            } else {
+                int temp = 0;
+                if (Character.isUpperCase(input.charAt(i))) {
+                    temp = alphaBeta.indexOf(input.charAt(i));
+                    if (isOddNumber(tempCounter)) {
+                        encryptText.append(encryptedStringKey2.charAt(temp));
+                    } else {
+                        encryptText.append(encryptedStringKey1.charAt(temp));
+                    }
+                } else {
+                    temp = alphaBeta.indexOf(Character.toUpperCase(input.charAt(i)));
+                    if (isOddNumber(tempCounter)) {
+                        encryptText.append(Character.toLowerCase(encryptedStringKey2.charAt(temp)));
+                    } else {
+                        encryptText.append(Character.toLowerCase(encryptedStringKey1.charAt(temp)));
+                    }
+                }
+            }
+        }
+
+        return encryptText.toString();
+    }
+
+    private static boolean isOddNumber(int number) {
+        return number % 2 == 0;
+    }
+
 
     public static void main(String[] args) throws IOException {
         System.out.println(encrypt("First Legion", 17));
+        System.out.println(encryptTwoKeys("First Legion",23, 17));
         testCaesar();
+
     }
 
 }
