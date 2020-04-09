@@ -7,7 +7,7 @@ import java.io.IOException;
 public class CaesarCipher {
     public static final String FILE_PATH = "src/main/resources/caesar_cipher_file.txt";
 
-    public static void testCaesar() throws IOException {
+    public void testCaesar() throws IOException {
         String myString = FileManager.getFileString(FILE_PATH);
         String encString = encrypt(myString, 23);
         System.out.println(encString);
@@ -22,7 +22,7 @@ public class CaesarCipher {
         return shiftedAlphaBeta.toString();
     }
 
-    public static String encrypt(String input, int key) {
+    public String encrypt(String input, int key) {
         String alphaBeta = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder encryptText = new StringBuilder();
         String encryptedString = getShiftedString(key);
@@ -90,11 +90,11 @@ public class CaesarCipher {
     }
 
 
-    public static void main(String[] args) throws IOException {
+   /* public static void main(String[] args) throws IOException {
         System.out.println(encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
         System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
         testCaesar();
 
-    }
+    }*/
 
 }
