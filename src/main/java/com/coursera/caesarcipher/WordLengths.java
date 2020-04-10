@@ -3,7 +3,6 @@ package com.coursera.caesarcipher;
 import com.coursera.utils.FileManager;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class WordLengths {
     public static final String FILE_PATH = "src/main/resources/common.txt";
@@ -48,7 +47,7 @@ public class WordLengths {
     // get all the common words from a file
     public static String[] getCommonWords() throws IOException {
         String commonWords = FileManager.getFileString(FILE_PATH);
-        return commonWords.split("\n");
+        return commonWords.split("\n|\r");
     }
 
     // returns the word index in the array
@@ -113,38 +112,59 @@ public class WordLengths {
         String resourceString = FileManager.getFileString(resource);
         String[] resourceStringArray = resourceString.split(" |\n|\r");
 
-        int numOfWords = wordCounter(resourceStringArray);
         for (int i = 0; i < resourceStringArray.length; i++) {
             int wordLength = 0;
             if (resourceStringArray[i].equals("")) {
                 continue;
             }
             if (resourceStringArray[i].contains(".") || resourceStringArray[i].contains(",")) {
-                if (resourceStringArray[i].endsWith(".") ||resourceStringArray[i].endsWith(",")) {
+                if (resourceStringArray[i].endsWith(".") || resourceStringArray[i].endsWith(",")) {
                     resourceStringArray[i] = resourceStringArray[i].substring(0, resourceStringArray[i].length() - 1);
                 }
-                wordLength = resourceStringArray[i].length() - 1;
-            } else {
-                wordLength = resourceStringArray[i].length();
             }
-            System.out.println(resourceStringArray[i].trim() + " " + wordLength);
+            wordLength = resourceStringArray[i].length();
+            // update counts counter
+            counts[wordLength] += 1;
+//            System.out.println(resourceStringArray[i].trim() + " " + wordLength);
         }
+    }
+
+    public static void testCountWordLengths() throws IOException {
+        String fileContent = SMALL_HAMLET_FILE_PATH;
+        int[] counts = new int[31];
+        countWordLengths(fileContent, counts);
+
+        for (int i = 0; i < counts.length; i++) {
+            if (counts[i] == 1) {
+                System.out.println(counts[i] + " word of length: " + i);
+            } else if (counts[i] > 1) {
+                System.out.println(counts[i] + " words of length: " + i);
+            }
+        }
+        int maxIndex = indexOfMax(counts);
+        System.out.println("The index with the maximum words is: " + maxIndex);
+    }
+
+    private static int indexOfMax(int[] counters) {
+        int maxIndex = -1;
+        int currentValue = 0;
+        for (int i = 0; i < counters.length; i++) {
+            if (counters[i] > currentValue) {
+                currentValue = counters[i];
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
     }
 
 
     public static void main(String[] args) throws IOException {
-        int[] counters = new int[13];
 
-        countWordLengths(SMALL_HAMLET_FILE_PATH, counters);
+        testCountWordLengths();
 
+        /*int[] counters = new int[13];
 
-        /*String commonWords = FileManager.getFileString(FILE_PATH);
-        String[] commonWordsArray = commonWords.split("\n");
-
-        String[] common = new String[20];
-        for (int i = 0; i < commonWordsArray.length; i++) {
-            common[i] = commonWordsArray[i].trim();
-        }*/
+        countWordLengths(SMALL_HAMLET_FILE_PATH, counters);*/
 
 //        lettersCounter("Think about how you approached solving this question and the algorithm you used.");
 
