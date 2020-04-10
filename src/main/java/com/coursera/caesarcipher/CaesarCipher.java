@@ -47,7 +47,7 @@ public class CaesarCipher {
         return encryptText.toString();
     }
 
-    public static String encryptTwoKeys(String input, int key1, int key2) {
+    public String encryptTwoKeys(String input, int key1, int key2) {
         String alphaBeta = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder encryptText = new StringBuilder();
         String encryptedStringKey1 = getShiftedString(key1);

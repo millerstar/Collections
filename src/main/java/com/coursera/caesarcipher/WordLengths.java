@@ -15,34 +15,6 @@ public class WordLengths {
     public static final String TEST_FILE_PATH = "src/main/resources/test_words_file.txt";
     public static final String SMALL_HAMLET_FILE_PATH = "src/main/resources/smallHamlet.txt";
 
-    public static int[] lettersCounter(String myString) {
-        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int[] counters = new int[26];
-        for (int k = 0; k < myString.length(); k++) {
-            char ch = myString.charAt(k);
-            int chIndex = alpha.indexOf(Character.toUpperCase(ch));
-            if (chIndex != -1) {
-                counters[chIndex] += 1;
-            } else {
-                System.out.println("Counter char was not found in the array");
-            }
-        }
-        /*for (int k = 0; k < counters.length; k++) {
-            System.out.println(alpha.charAt(k) + "\t" + counters[k]);
-        }*/
-        return counters;
-    }
-
-    public static int maxIndex(int[] frequencyArray) {
-        int maxIndex = 0;
-        for (int i = 0; i < frequencyArray.length; i++) {
-            if (frequencyArray[i] > frequencyArray[maxIndex]) {
-                maxIndex = i;
-            }
-        }
-        return maxIndex;
-    }
-
 
     // get all the common words from a file
     public static String[] getCommonWords() throws IOException {
@@ -85,17 +57,6 @@ public class WordLengths {
         for (int i = 0; i < common.length; i++) {
             System.out.println(common[i].trim() + "\t\t" + counts[i]);
         }
-    }
-
-    public static String decrypt(String encryptedText) {
-        CaesarCipher cc = new CaesarCipher();
-        int[] freqLetters = lettersCounter(encryptedText);
-        int maxDex = maxIndex(freqLetters);
-        int dkey = maxDex - 4;
-        if (maxDex < 4) {
-            dkey = 26 - (4 - dkey);
-        }
-        return cc.encrypt(encryptedText, 26 - dkey);
     }
 
     private static int wordCounter(String[] arrayOfWords) {
