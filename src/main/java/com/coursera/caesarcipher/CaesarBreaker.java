@@ -20,7 +20,7 @@ public class CaesarBreaker {
         return maxIndex;
     }
 
-    public static int[] lettersCounter(String myString) {
+    public int[] lettersCounter(String myString) {
         String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int[] counters = new int[26];
         for (int k = 0; k < myString.length(); k++) {
@@ -35,7 +35,7 @@ public class CaesarBreaker {
         return counters;
     }
 
-    private static int getDecryptionKey(int maxIndex) {
+    public int getDecryptionKey(int maxIndex) {
         int dkey = maxIndex - 4;
         if (maxIndex < 4) {
             dkey = 26 - (4 - maxIndex);
@@ -43,7 +43,7 @@ public class CaesarBreaker {
         return dkey;
     }
 
-    public static String decrypt(String encryptedText) {
+    public String decrypt(String encryptedText) {
         CaesarCipher cc = new CaesarCipher();
         int[] freqLetters = lettersCounter(encryptedText);
         int maxDex = maxIndex(freqLetters);
@@ -51,7 +51,7 @@ public class CaesarBreaker {
         return cc.encrypt(encryptedText, 26 - dkey);
     }
 
-    public static void testDecrypt() throws IOException {
+    public  void testDecrypt() throws IOException {
         CaesarCipher caesarCipher = new CaesarCipher();
         String fileString = FileManager.getFileString(WORDS_LOTS_OF_E_FILE_PATH);
         String encrytedText = caesarCipher.encrypt(fileString, 17);
@@ -70,12 +70,12 @@ public class CaesarBreaker {
         return stringBuilder.toString();
     }
 
-    public static int getKey(String s) {
+    public  int getKey(String s) {
         int[] lettersCounter = lettersCounter(s);
         return getDecryptionKey(maxIndex(lettersCounter));
     }
 
-    public static String decryptTwoKeys(String encrypted) throws IOException {
+    public String decryptTwoKeys(String encrypted) throws IOException {
         CaesarCipher caesarCipher = new CaesarCipher();
         String firstString = halfOfString(encrypted, 0);
         String secoundString = halfOfString(encrypted, 1);
