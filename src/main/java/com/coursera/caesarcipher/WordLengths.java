@@ -14,6 +14,7 @@ public class WordLengths {
     public static final String ERRORS_FILE_PATH = "src/main/resources/errors.txt";
     public static final String TEST_FILE_PATH = "src/main/resources/test_words_file.txt";
     public static final String SMALL_HAMLET_FILE_PATH = "src/main/resources/smallHamlet.txt";
+    public static final String LOTS_OF_WORDS_FILE_PATH = "src/main/resources/lots_of_words.txt";
 
 
     // get all the common words from a file
@@ -91,7 +92,7 @@ public class WordLengths {
     }
 
     public static void testCountWordLengths() throws IOException {
-        String fileContent = SMALL_HAMLET_FILE_PATH;
+        String fileContent = ROMEO_FILE_PATH;
         int[] counts = new int[31];
         countWordLengths(fileContent, counts);
 

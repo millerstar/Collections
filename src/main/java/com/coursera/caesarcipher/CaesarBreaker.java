@@ -7,6 +7,8 @@ import java.io.IOException;
 public class CaesarBreaker {
     public static final String WORDS_LOTS_OF_E_FILE_PATH = "src/main/resources/wordsLotsOfEs.txt";
     public static final String WORDS_LOTS_OF_E_ENCRYPTED_FILE_PATH = "src/main/resources/wordsLotsOfEsEncrypted.txt";
+    public static final String ROMEO_FILE_PATH = "src/main/resources/romeo.txt";
+    public static final String MYSTERY_FILE_PATH = "src/main/resources/mysteryTwoKeysPractice.txt";
 
     public static int maxIndex(int[] frequencyArray) {
         int maxIndex = 0;
@@ -89,16 +91,20 @@ public class CaesarBreaker {
 
     public static void main(String[] args) throws IOException {
 
-        String fileString = FileManager.getFileString(WORDS_LOTS_OF_E_ENCRYPTED_FILE_PATH);
-        String encreyptedMessage = decryptTwoKeys(fileString);
-        System.out.println(encreyptedMessage);
+        /*CaesarCipher cc = new CaesarCipher();
+        System.out.println(cc.encryptTwoKeys("Top ncmy qkff vi vguv vbg ycpx", 2, 20));*/
+
+
+//        String fileString = FileManager.getFileString(MYSTERY_FILE_PATH);
+//        String encreyptedMessage = decryptTwoKeys("Top ncmy qkff vi vguv vbg ycpx");
+//        System.out.println(encreyptedMessage);
 
 
 
 //        System.out.println(getKey("Just a test string with lots of"));
 //        System.out.println(halfOfString("Qbkm Zgis", 1));
 
-        testDecrypt();
+//        testDecrypt();
     }
 
 
