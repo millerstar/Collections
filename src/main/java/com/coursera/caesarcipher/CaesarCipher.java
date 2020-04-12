@@ -85,7 +85,7 @@ public class CaesarCipher {
         return encryptText.toString();
     }
 
-    private static boolean isOddNumber(int number) {
+    public boolean isOddNumber(int number) {
         return number % 2 == 0;
     }
 
