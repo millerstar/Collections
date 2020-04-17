@@ -1,9 +1,7 @@
 package com.coursera.randomstory;
 
 import com.coursera.edu.duke.FileResource;
-import com.coursera.utils.FileManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
