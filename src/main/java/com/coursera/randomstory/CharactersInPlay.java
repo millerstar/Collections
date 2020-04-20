@@ -8,7 +8,8 @@ import java.util.List;
 public class CharactersInPlay {
     private List<String> charactersNames;
     private List<Integer> charactersCounts;
-    public static final String FILE_PATH = "src/main/resources/macbethSmall.txt";
+//    public static final String FILE_PATH = "src/main/resources/macbethSmall.txt";
+    public static final String FILE_PATH = "src/main/resources/macbeth.txt";
 
     public CharactersInPlay() {
         this.charactersNames = new ArrayList<>();
@@ -39,10 +40,17 @@ public class CharactersInPlay {
 
     public void tester(String stringFile) {
         findAllCharacters(stringFile);
-        for (int i = 0; i < charactersCounts.size(); i++) {
-            System.out.println(charactersNames.get(i) + " " + charactersCounts.get(i));
-        }
 
+        charactersWithNumParts(3,10);
+
+    }
+
+    public void charactersWithNumParts(int num1, int num2) {
+        for (int i = 0; i < charactersCounts.size(); i++) {
+            if (charactersCounts.get(i) >= num1 && charactersCounts.get(i) <= num2) {
+                System.out.println(charactersNames.get(i) + " " + charactersCounts.get(i));
+            }
+        }
     }
 
     public static void main(String[] args) {
