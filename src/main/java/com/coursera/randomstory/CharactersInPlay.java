@@ -9,14 +9,14 @@ public class CharactersInPlay {
     private List<String> charactersNames;
     private List<Integer> charactersCounts;
 //    public static final String FILE_PATH = "src/main/resources/macbethSmall.txt";
-    public static final String FILE_PATH = "src/main/resources/macbeth.txt";
+    public static final String FILE_PATH = "src/main/resources/likeit.txt";
 
     public CharactersInPlay() {
         this.charactersNames = new ArrayList<>();
         this.charactersCounts = new ArrayList<>();
     }
 
-    public void update(String person) {
+    private void update(String person) {
         int index = charactersNames.indexOf(person);
         if (index == -1) {
             charactersNames.add(person);
@@ -27,7 +27,7 @@ public class CharactersInPlay {
         }
     }
 
-    public void findAllCharacters(String stringFile) {
+    private void findAllCharacters(String stringFile) {
         FileResource fileResource = new FileResource(stringFile);
         for (String line : fileResource.lines()) {
             if (line.contains(".") && line.charAt(3) != ' ') {
@@ -41,12 +41,13 @@ public class CharactersInPlay {
     public void tester(String stringFile) {
         findAllCharacters(stringFile);
 
-        charactersWithNumParts(3,10);
+        charactersWithNumParts(10,15);
 
     }
 
-    public void charactersWithNumParts(int num1, int num2) {
+    private void charactersWithNumParts(int num1, int num2) {
         for (int i = 0; i < charactersCounts.size(); i++) {
+//            System.out.println(charactersNames.get(i) + " " + charactersCounts.get(i));
             if (charactersCounts.get(i) >= num1 && charactersCounts.get(i) <= num2) {
                 System.out.println(charactersNames.get(i) + " " + charactersCounts.get(i));
             }

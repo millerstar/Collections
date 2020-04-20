@@ -8,7 +8,7 @@ import java.util.List;
 public class WordFrequencies2 {
     private List<String> myWords;
     private List<Integer> myFreqs;
-    public static final String FILE_PATH = "src/main/resources/testwordfreqs.txt";
+    public static final String FILE_PATH = "src/main/resources/likeit.txt";
 
     public WordFrequencies2() {
         this.myWords = new ArrayList<>();
