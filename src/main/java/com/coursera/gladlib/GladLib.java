@@ -20,15 +20,20 @@ public class GladLib {
 
     private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
     private static String dataSourceDirectory = "src\\main\\java\\com\\coursera\\gladlib\\data";
+    private List<String> storyWords;
 
     public GladLib() {
         initializeFromSource(dataSourceDirectory);
         myRandom = new Random();
+        storyWords = new ArrayList<>();
+        storyWords.clear();
     }
 
     public GladLib(String source) {
         initializeFromSource(source);
         myRandom = new Random();
+        storyWords = new ArrayList<>();
+        storyWords.clear();
     }
 
     private void initializeFromSource(String source) {
@@ -91,7 +96,22 @@ public class GladLib {
         String prefix = w.substring(0, first);
         String suffix = w.substring(last + 1);
         String sub = getSubstitute(w.substring(first + 1, last));
+        if (isWordExist(sub.toLowerCase())) {
+            do {
+                sub = getSubstitute(w.substring(first + 1, last));
+            } while (isWordExist(sub));
+        }
+        storyWords.add(sub.toLowerCase());
         return prefix + sub + suffix;
+    }
+
+    private boolean isWordExist (String word) {
+        boolean isExist = false;
+        int index = storyWords.indexOf(word);
+        if (index >= 0) {
+            isExist = true;
+        }
+        return isExist;
     }
 
     private void printOut(String s, int lineWidth) {
