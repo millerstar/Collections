@@ -69,8 +69,51 @@ public class WordsInFiles {
         return maxVal;
     }
 
+    public ArrayList<String> wordsInNumFiles(int numberOfFiles) {
+        ArrayList<String> wordsFromFiles = new ArrayList<>();
+        buildWordFileMap();
+
+        for (String word : wordsInFilesMap.keySet()) {
+            if (wordsInFilesMap.get(word).size() == numberOfFiles) {
+                wordsFromFiles.add(word);
+            }
+        }
+        return wordsFromFiles;
+    }
+
+    public void printFilesIn(String word) {
+        for (String wordKey : wordsInFilesMap.keySet()) {
+            if (wordKey.equalsIgnoreCase(word)) {
+                ArrayList<String> filesNameList;
+                filesNameList = wordsInFilesMap.get(wordKey);
+                for (String fileName : filesNameList) {
+                    System.out.println(fileName);
+                }
+            }
+        }
+    }
+
+    public void tester() {
+//        buildWordFileMap();
+        System.out.println("maximum repeated words");
+        System.out.println("-----------------------");
+        for (String word : wordsInNumFiles(3)) {
+            System.out.println(word);
+        }
+        System.out.println("The word 'cats'");
+        System.out.println("---------------");
+        printFilesIn("cats");
+
+        System.out.println("The word 'and'");
+        System.out.println("---------------");
+        printFilesIn("and");
+
+    }
+
     public static void main(String[] args) {
         WordsInFiles wordsInFiles = new WordsInFiles();
-        wordsInFiles.buildWordFileMap();
+        wordsInFiles.tester();
+//        wordsInFiles.wordsInNumFiles(2);
+//        wordsInFiles.printFilesIn("cats");
     }
 }
