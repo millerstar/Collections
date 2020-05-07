@@ -9,7 +9,7 @@ public class CharactersInPlay {
     private List<String> charactersNames;
     private List<Integer> charactersCounts;
 //    public static final String FILE_PATH = "src/main/resources/macbethSmall.txt";
-    public static final String FILE_PATH = "src/main/resources/likeit.txt";
+    public static final String FILE_PATH = "src/main/resources/errors.txt";
 
     public CharactersInPlay() {
         this.charactersNames = new ArrayList<>();

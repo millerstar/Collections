@@ -2,6 +2,7 @@ package com.coursera.randomstory;
 
 import com.coursera.edu.duke.FileResource;
 import com.coursera.gladlib.GladLib;
+import com.coursera.gladlib.GladLibMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +37,13 @@ public class TestClass {
 //        storyGenerator.makeStory();
 
         // hashMaps
-        countWords(FILE_PATH);
+//        countWords(FILE_PATH);
+
+        GladLibMap storyGenerator = new GladLibMap();
+        storyGenerator.makeStory();
+        System.out.println();
+        System.out.println("------------------------------");
+        System.out.println("Total words in the map: " + storyGenerator.totalWordsInMap());
+        System.out.println("Total words by used label : " + storyGenerator.totalWordsConsidered());
     }
 }

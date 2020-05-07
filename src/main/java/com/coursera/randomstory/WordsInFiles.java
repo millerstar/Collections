@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class WordsInFiles {
-    public static final String FILE_1 = "src/main/resources/brief1.txt";
-    public static final String FILE_2 = "src/main/resources/brief2.txt";
-    public static final String FILE_3 = "src/main/resources/brief3.txt";
-    public static final String FILES_SOURCE_DIR = "src/main/resources/briefs";
+
+//    public static final String FILES_SOURCE_DIR = "src/main/resources/briefs";
+    public static final String FILES_SOURCE_DIR = "src/main/resources/plays";
     private HashMap<String, ArrayList<String>> wordsInFilesMap;
 
     public WordsInFiles() {
@@ -44,7 +43,7 @@ public class WordsInFiles {
         for (String filePath : filesList) {
             addWordsFromFile(new File(filePath));
         }
-        System.out.println("MAx value is: " + maxNumber());
+        System.out.println("Max value is: " + maxNumber());
     }
 
     private ArrayList<String> getFilesFromFolderList(final File folder) {
@@ -97,23 +96,24 @@ public class WordsInFiles {
 //        buildWordFileMap();
         System.out.println("maximum repeated words");
         System.out.println("-----------------------");
-        for (String word : wordsInNumFiles(3)) {
-            System.out.println(word);
+        for (String word : wordsInNumFiles(7)) {
+//            System.out.println(word);
         }
-        System.out.println("The word 'cats'");
+        System.out.println("The word 'tree'");
         System.out.println("---------------");
-        printFilesIn("cats");
+        printFilesIn("tree");
 
-        System.out.println("The word 'and'");
+        /*System.out.println("The word 'sea'");
         System.out.println("---------------");
-        printFilesIn("and");
+        printFilesIn("and");*/
 
     }
 
     public static void main(String[] args) {
         WordsInFiles wordsInFiles = new WordsInFiles();
         wordsInFiles.tester();
-//        wordsInFiles.wordsInNumFiles(2);
+//        wordsInFiles.wordsInNumFiles(7);
+//        System.out.println("Ilan");
 //        wordsInFiles.printFilesIn("cats");
     }
 }

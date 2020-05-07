@@ -6,7 +6,8 @@ import com.coursera.edu.duke.FileResource;
 import java.util.HashMap;
 
 public class CodonCount {
-    public static final String FILE_PATH = "src/main/resources/smalldna.txt";
+//    public static final String FILE_PATH = "src/main/resources/smalldna.txt";
+    public static final String FILE_PATH = "src/main/resources/dnaMystery2.txt";
     private HashMap<String, Integer> dnaCodonsMap;
     private int maxVal = 0;
 
@@ -60,26 +61,26 @@ public class CodonCount {
         System.out.println("Reading frame starting with 0, results in " + dnaCodonsMap.size() + " unique codons.");
         System.out.println("and most common codon is " + getMostCommonCodon() + " with count " + maxVal);
         System.out.println("Counts of codons between 1 and 5 inclusive are:");
-        printCodonCounts(1, 5);
+        printCodonCounts(1, 300);
 
         System.out.println("-----------------------------------------------------------------");
 
         for (String s : fileResource.words()) {
             buildCodonMap(1, s);
         }
-        System.out.println("Reading frame starting with 0, results in " + dnaCodonsMap.size() + " unique codons.");
+        System.out.println("Reading frame starting with 1, results in " + dnaCodonsMap.size() + " unique codons.");
         System.out.println("and most common codon is " + getMostCommonCodon() + " with count " + maxVal);
         System.out.println("Counts of codons between 1 and 5 inclusive are:");
-        printCodonCounts(1, 5);
+        printCodonCounts(1, 300);
 
         System.out.println("-----------------------------------------------------------------");
         for (String s : fileResource.words()) {
             buildCodonMap(2, s);
         }
-        System.out.println("Reading frame starting with 0, results in " + dnaCodonsMap.size() + " unique codons.");
+        System.out.println("Reading frame starting with 2, results in " + dnaCodonsMap.size() + " unique codons.");
         System.out.println("and most common codon is " + getMostCommonCodon() + " with count " + maxVal);
         System.out.println("Counts of codons between 1 and 5 inclusive are:");
-        printCodonCounts(1, 5);
+        printCodonCounts(1, 300);
         System.out.println("-----------------------------------------------------------------");
 
     }
