@@ -10,7 +10,8 @@ import java.text.ParseException;
 import java.util.*;
 
 public class Tester {
-    public static final String FILE_PATH = "src/main/resources/weblog-short_log.txt";
+//    public static final String FILE_PATH = "src/main/resources/weblog-short_log.txt";
+    public static final String FILE_PATH = "src/main/resources/weblog1_log.txt";
 
     public void testLogEntry() {
         LogEntry le = new LogEntry("1.2.3.4", new Date(), "example request", 200, 500);
@@ -44,11 +45,18 @@ public class Tester {
         logAnalyzer.uniqueIPVisitsOnDay(selectedDate);
     }
 
+    public void testCountUniqueIPsInRange (int low, int high) {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        logAnalyzer.countUniqueIPsInRange(low, high);
+    }
+
     public static void main(String[] args) {
         Tester tester = new Tester();
-        tester.testLogAnalyzer();
-        tester.testUniqueIP();
-        tester.testRecordNumberByErrorCode(302);
-        tester.testUniqueIPVisitsOnDay("Sep 30");
+//        tester.testLogAnalyzer();
+//        tester.testUniqueIP();
+//        tester.testRecordNumberByErrorCode(400);
+//        tester.testUniqueIPVisitsOnDay("Mar 17");
+        tester.testCountUniqueIPsInRange(300, 399);
     }
 }
