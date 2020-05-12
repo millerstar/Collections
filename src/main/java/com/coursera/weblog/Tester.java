@@ -6,12 +6,11 @@ package com.coursera.weblog;
  * @version (a version number or a date)
  */
 
-import java.text.ParseException;
 import java.util.*;
 
 public class Tester {
-//    public static final String FILE_PATH = "src/main/resources/weblog-short_log.txt";
-    public static final String FILE_PATH = "src/main/resources/weblog1_log.txt";
+    //    public static final String FILE_PATH = "src/main/resources/weblog-short_log.txt";
+    public static final String FILE_PATH = "src/main/resources/weblog3-short_log.txt";
 
     public void testLogEntry() {
         LogEntry le = new LogEntry("1.2.3.4", new Date(), "example request", 200, 500);
@@ -45,10 +44,47 @@ public class Tester {
         logAnalyzer.uniqueIPVisitsOnDay(selectedDate);
     }
 
-    public void testCountUniqueIPsInRange (int low, int high) {
+    public void testCountUniqueIPsInRange(int low, int high) {
         LogAnalyzer logAnalyzer = new LogAnalyzer();
         logAnalyzer.readFile(FILE_PATH);
         logAnalyzer.countUniqueIPsInRange(low, high);
+    }
+
+    public void testCountVisitsPerIP() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        HashMap<String, Integer> count = logAnalyzer.countVisitsPerIP();
+        System.out.println(count);
+
+    }
+
+    public HashMap<String, Integer> getVisitsMap() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        HashMap<String, Integer> count = logAnalyzer.countVisitsPerIP();
+        return count;
+    }
+
+    public int testMostNumberVisitsByIP(HashMap<String, Integer> visitsMap) {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        return logAnalyzer.mostNumberVisitsByIP(visitsMap);
+    }
+
+    public void testIPsMostVisits() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        HashMap<String, Integer> visitorsMap = logAnalyzer.countVisitsPerIP();
+        ArrayList<String> mostVisitedIPs = logAnalyzer.iPsMostVisits(visitorsMap);
+        for (String ip : mostVisitedIPs) {
+            System.out.println(ip);
+        }
+    }
+
+    public void testIPsForDays() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        logAnalyzer.iPsForDays();
+
     }
 
     public static void main(String[] args) {
@@ -57,6 +93,10 @@ public class Tester {
 //        tester.testUniqueIP();
 //        tester.testRecordNumberByErrorCode(400);
 //        tester.testUniqueIPVisitsOnDay("Mar 17");
-        tester.testCountUniqueIPsInRange(300, 399);
+//        tester.testCountUniqueIPsInRange(300, 399);
+
+//        System.out.println("Maximum visits in the site is: " + tester.testMostNumberVisitsByIP(tester.getVisitsMap()));
+//        tester.testIPsMostVisits();
+        tester.testIPsForDays();
     }
 }

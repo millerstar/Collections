@@ -9,6 +9,7 @@ package com.coursera.weblog;
 import java.util.*;
 
 import com.coursera.edu.duke.*;
+import org.omg.CORBA.INTERNAL;
 
 public class LogAnalyzer {
     private ArrayList<LogEntry> records;
@@ -67,6 +68,17 @@ public class LogAnalyzer {
         return uniqueIPs;
     }
 
+    public ArrayList<String> iPVisitsOnDay(String someday) {
+        ArrayList<String> uniqueIPs = new ArrayList<>();
+        for (LogEntry logEntry : records) {
+            String entryTime = logEntry.getAccessTime().toString();
+            if (entryTime.contains(someday)) {
+                uniqueIPs.add(logEntry.getIpAddress());
+            }
+        }
+        return uniqueIPs;
+    }
+
     public int countUniqueIPsInRange(int low, int high) {
         ArrayList<String> uniqueIPs = new ArrayList<>();
         for (LogEntry logEntry : records) {
@@ -76,6 +88,48 @@ public class LogAnalyzer {
             }
         }
         return uniqueIPs.size();
+    }
+
+    public HashMap<String, Integer> countVisitsPerIP() {
+        HashMap<String, Integer> countsMap = new HashMap<>();
+        for (LogEntry logEntry : records) {
+            String ip = logEntry.getIpAddress();
+            if (countsMap.containsKey(ip)) {
+                countsMap.put(ip, countsMap.get(ip) + 1);
+            } else {
+                countsMap.put(ip, 1);
+            }
+        }
+        return countsMap;
+    }
+
+    public int mostNumberVisitsByIP(HashMap<String, Integer> countsMap) {
+        int maxNumOfVisits = 0;
+        for (String ip : countsMap.keySet()) {
+            if (countsMap.get(ip) > maxNumOfVisits) {
+                maxNumOfVisits = countsMap.get(ip);
+            }
+        }
+        return maxNumOfVisits;
+    }
+
+    public ArrayList<String> iPsMostVisits(HashMap<String, Integer> visitsPerIPMap) {
+        ArrayList<String> iPsMostVisitsList = new ArrayList<>();
+        int maxOfVisits = mostNumberVisitsByIP(visitsPerIPMap);
+        for (String ip : visitsPerIPMap.keySet()) {
+            if (visitsPerIPMap.get(ip) == maxOfVisits) {
+                iPsMostVisitsList.add(ip);
+            }
+        }
+        return iPsMostVisitsList;
+    }
+
+    public HashMap<String, ArrayList<String>> iPsForDays() {
+        HashMap<String, ArrayList<String>> IPsForDaysMap = new HashMap<>();
+        String selectedDate = "Sep 21";
+        ArrayList<String> uniqueIPVOnDay = iPVisitsOnDay(selectedDate);
+        IPsForDaysMap.put(selectedDate, uniqueIPVOnDay);
+        return IPsForDaysMap;
     }
 
 
