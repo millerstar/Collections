@@ -6,11 +6,12 @@ package com.coursera.weblog;
  * @version (a version number or a date)
  */
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Tester {
     //    public static final String FILE_PATH = "src/main/resources/weblog-short_log.txt";
-    public static final String FILE_PATH = "src/main/resources/weblog3-short_log.txt";
+    public static final String FILE_PATH = "src/main/resources/weblog2_log.txt";
 
     public void testLogEntry() {
         LogEntry le = new LogEntry("1.2.3.4", new Date(), "example request", 200, 500);
@@ -87,16 +88,43 @@ public class Tester {
 
     }
 
+    public void testIPsForMultiDays() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        logAnalyzer.iPsForMultiDays();
+    }
+
+    public void testDayWithMostIPVisits() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        HashMap<String, ArrayList<String>> ipsPreDayMap = logAnalyzer.iPsForMultiDays();
+        String maxVisitsOnDay = logAnalyzer.dayWithMostIPVisits(ipsPreDayMap);
+        System.out.println("The day most visited is: " + maxVisitsOnDay);
+
+    }
+
+    public void testIPsWithMostVisitsOnDay() {
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+        logAnalyzer.readFile(FILE_PATH);
+        HashMap<String, ArrayList<String>> ipsPreDayMap = logAnalyzer.iPsForMultiDays();
+        String testDate = "Sep 30";
+
+        ArrayList<String> iPsList = logAnalyzer.iPsWithMostVisitsOnDay(ipsPreDayMap,testDate);
+
+    }
+
     public static void main(String[] args) {
         Tester tester = new Tester();
 //        tester.testLogAnalyzer();
 //        tester.testUniqueIP();
 //        tester.testRecordNumberByErrorCode(400);
-//        tester.testUniqueIPVisitsOnDay("Mar 17");
-//        tester.testCountUniqueIPsInRange(300, 399);
+//        tester.testUniqueIPVisitsOnDay("Sep 27");
+//        tester.testCountUniqueIPsInRange(400, 499);
 
 //        System.out.println("Maximum visits in the site is: " + tester.testMostNumberVisitsByIP(tester.getVisitsMap()));
 //        tester.testIPsMostVisits();
-        tester.testIPsForDays();
+//        tester.testIPsForDays();
+//        tester.testDayWithMostIPVisits();
+        tester.testIPsWithMostVisitsOnDay();
     }
 }
