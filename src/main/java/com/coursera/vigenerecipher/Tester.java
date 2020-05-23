@@ -1,0 +1,78 @@
+package com.coursera.vigenerecipher;
+
+import com.coursera.edu.duke.FileResource;
+
+public class Tester {
+        public static final String FILE_PATH = "src/main/resources/titus-small.txt";
+//    public static final String FILE_PATH = "src/main/resources/oslusiadas_key17.txt";
+
+    public String testEncryption(int encryptionKey) {
+        FileResource fileResource = new FileResource(FILE_PATH);
+        StringBuilder textFromFile = new StringBuilder();
+        for (String line : fileResource.lines()) {
+            textFromFile.append(line);
+        }
+
+        CaesarCipher caesarCipher = new CaesarCipher(encryptionKey);
+        String encryptedString = caesarCipher.encrypt(textFromFile.toString());
+        return encryptedString;
+    }
+
+    public String testDecryption(String encryptedTest, int encryptionKey) {
+        CaesarCipher caesarCipher = new CaesarCipher(encryptionKey);
+        return caesarCipher.decrypt(encryptedTest);
+    }
+
+    public char testEncryptLetter(char letter) {
+        CaesarCipher caesarCipher = new CaesarCipher(5);
+        char encryptedChar = caesarCipher.encryptLetter(letter);
+        return encryptedChar;
+    }
+
+    public char testDecryptLetter(char letter) {
+        CaesarCipher caesarCipher = new CaesarCipher(5);
+        char decryptedChar = caesarCipher.decryptLetter(letter);
+        return decryptedChar;
+    }
+
+    public int testGetKey(String encryptedText) {
+        CaesarCracker caesarCracker = new CaesarCracker('a');
+        return caesarCracker.getKey(encryptedText);
+    }
+
+    public String testVeneerCipherEncrypt(String stringText) {
+        int[] encKey = new int[]{17, 14, 12, 4};
+        VigenereCipher vigenereCipher = new VigenereCipher(encKey);
+        return vigenereCipher.encrypt(stringText);
+
+    }
+
+    public static void main(String[] args) {
+        FileResource fileResource = new FileResource(FILE_PATH);
+        StringBuilder textFromFile = new StringBuilder();
+        for (String line : fileResource.lines()) {
+            textFromFile.append(line);
+        }
+
+
+        Tester tester = new Tester();
+
+        // Encrypt & Decrypt file text
+//        String encText = tester.testEncryption(5);
+//        String decText = tester.testDecryption(encText, 5);
+//        System.out.println(encText);
+//        System.out.println("----------------------");
+//        System.out.println(decText);
+
+        // Encrypt & Decrypt chars
+//        System.out.println(tester.testEncryptLetter('B'));
+//        System.out.println(tester.testDecryptLetter('G'));
+
+        // get encryption key
+//        System.out.println(tester.testGetKey(textFromFile.toString()));
+
+        //  Encrypt & Decrypt file text - VigenereCipher
+        tester.testVeneerCipherEncrypt(textFromFile.toString());
+    }
+
+}
