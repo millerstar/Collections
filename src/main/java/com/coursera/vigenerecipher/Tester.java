@@ -3,7 +3,8 @@ package com.coursera.vigenerecipher;
 import com.coursera.edu.duke.FileResource;
 
 public class Tester {
-        public static final String FILE_PATH = "src/main/resources/titus-small.txt";
+//        public static final String FILE_PATH = "src/main/resources/titus-small_key5.txt";
+    public static final String FILE_PATH = "src/main/resources/titus-small.txt";
 //    public static final String FILE_PATH = "src/main/resources/oslusiadas_key17.txt";
 
     public String testEncryption(int encryptionKey) {
@@ -36,7 +37,8 @@ public class Tester {
     }
 
     public int testGetKey(String encryptedText) {
-        CaesarCracker caesarCracker = new CaesarCracker('a');
+//        CaesarCracker caesarCracker = new CaesarCracker('a');
+        CaesarCracker caesarCracker = new CaesarCracker();
         return caesarCracker.getKey(encryptedText);
     }
 
@@ -45,6 +47,12 @@ public class Tester {
         VigenereCipher vigenereCipher = new VigenereCipher(encKey);
         return vigenereCipher.encrypt(stringText);
 
+    }
+
+    public String testSliceString(String message, int whichSlice, int totalSlices) {
+        VigenereBreaker vigenereBreaker = new VigenereBreaker();
+        String sliceString = vigenereBreaker.sliceString(message, whichSlice, totalSlices);
+        return sliceString;
     }
 
     public static void main(String[] args) {
@@ -72,7 +80,15 @@ public class Tester {
 //        System.out.println(tester.testGetKey(textFromFile.toString()));
 
         //  Encrypt & Decrypt file text - VigenereCipher
-        tester.testVeneerCipherEncrypt(textFromFile.toString());
+//        System.out.println(tester.testVeneerCipherEncrypt(textFromFile.toString()));
+
+
+
+        // test VigenereBreaker
+        // SliceString
+        System.out.println(tester.testSliceString("abcdefghijklm", 4, 5));
+
+
     }
 
 }
