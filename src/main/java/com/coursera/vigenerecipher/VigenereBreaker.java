@@ -15,8 +15,8 @@ public class VigenereBreaker {
         //WRITE YOUR CODE HERE
         CaesarCracker caesarCracker = new CaesarCracker();
         for (int i = 0; i < klength; i++) {
-            String temp = sliceString(encrypted, i, klength);
-            int newKey = caesarCracker.getKey(temp);
+            String encryptedString = sliceString(encrypted, i, klength);
+            int newKey = caesarCracker.getKey(encryptedString);
             key[i] = newKey;
         }
         return key;
