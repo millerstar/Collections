@@ -3,9 +3,10 @@ package com.coursera.vigenerecipher;
 import com.coursera.edu.duke.FileResource;
 
 public class Tester {
-//        public static final String FILE_PATH = "src/main/resources/titus-small_key5.txt";
-    public static final String FILE_PATH = "src/main/resources/titus-small.txt";
+    //        public static final String FILE_PATH = "src/main/resources/titus-small_key5.txt";
+//    public static final String FILE_PATH = "src/main/resources/titus-small.txt";
 //    public static final String FILE_PATH = "src/main/resources/oslusiadas_key17.txt";
+    public static final String FILE_PATH = "src/main/resources/athens_keyflute.txt";
 
     public String testEncryption(int encryptionKey) {
         FileResource fileResource = new FileResource(FILE_PATH);
@@ -55,6 +56,11 @@ public class Tester {
         return sliceString;
     }
 
+    public void testTryKeyLength(String encrypted, int klength, char mostCommon) {
+        VigenereBreaker vigenereBreaker = new VigenereBreaker();
+        vigenereBreaker.tryKeyLength(encrypted, klength, mostCommon);
+    }
+
     public static void main(String[] args) {
         FileResource fileResource = new FileResource(FILE_PATH);
         StringBuilder textFromFile = new StringBuilder();
@@ -83,10 +89,13 @@ public class Tester {
 //        System.out.println(tester.testVeneerCipherEncrypt(textFromFile.toString()));
 
 
-
         // test VigenereBreaker
         // SliceString
-        System.out.println(tester.testSliceString("abcdefghijklm", 4, 5));
+//        System.out.println(tester.testSliceString("abcdefghijklm", 0, 5));
+
+        // test VigenereBreaker
+        // tryKeyLength
+        tester.testTryKeyLength(textFromFile.toString(), 5, 'e');
 
 
     }
