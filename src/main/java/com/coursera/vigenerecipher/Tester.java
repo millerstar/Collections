@@ -61,12 +61,20 @@ public class Tester {
         vigenereBreaker.tryKeyLength(encrypted, klength, mostCommon);
     }
 
+    public void testBreakVigenere(String filePath) {
+        VigenereBreaker vigenereBreaker = new VigenereBreaker();
+        vigenereBreaker.breakVigenere(filePath);
+    }
+
     public static void main(String[] args) {
-        FileResource fileResource = new FileResource(FILE_PATH);
+       /* FileResource fileResource = new FileResource(FILE_PATH);
         StringBuilder textFromFile = new StringBuilder();
         for (String line : fileResource.lines()) {
             textFromFile.append(line);
-        }
+        }*/
+
+        FileResource fileResource = new FileResource(FILE_PATH);
+        String textFromFile = fileResource.asString();
 
 
         Tester tester = new Tester();
@@ -83,10 +91,10 @@ public class Tester {
 //        System.out.println(tester.testDecryptLetter('G'));
 
         // get encryption key
-//        System.out.println(tester.testGetKey(textFromFile.toString()));
+//        System.out.println(tester.testGetKey(textFromFile));
 
         //  Encrypt & Decrypt file text - VigenereCipher
-//        System.out.println(tester.testVeneerCipherEncrypt(textFromFile.toString()));
+//        System.out.println(tester.testVeneerCipherEncrypt(textFromFile));
 
 
         // test VigenereBreaker
@@ -95,7 +103,11 @@ public class Tester {
 
         // test VigenereBreaker
         // tryKeyLength
-        tester.testTryKeyLength(textFromFile.toString(), 5, 'e');
+        tester.testTryKeyLength(textFromFile, 5, 'e');
+
+        // test VigenereBreaker
+        // breakVigenere
+        tester.testBreakVigenere(FILE_PATH);
 
 
     }
