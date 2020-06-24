@@ -8,7 +8,9 @@ public class Tester {
 //    public static final String FILE_PATH = "src/main/resources/oslusiadas_key17.txt";
 //    public static final String FILE_PATH = "src/main/resources/athens_keyflute.txt";
 //    public static final String FILE_PATH = "src/main/resources/secretmessage1.txt";
-        public static final String FILE_PATH = "src/main/resources/secretmessage2.txt";
+//        public static final String FILE_PATH = "src/main/resources/secretmessage2.txt";
+//    public static final String FILE_PATH = "src/main/resources/secretmessage3.txt";
+    public static final String FILE_PATH = "src/main/resources/secretmessage4.txt";
 
     public String testEncryption(int encryptionKey) {
         FileResource fileResource = new FileResource(FILE_PATH);
@@ -73,6 +75,11 @@ public class Tester {
         vigenereBreaker.breakVigenere2(filePath);
     }
 
+    public void testBreakVigenere3(String filePath) {
+        VigenereBreaker vigenereBreaker = new VigenereBreaker();
+        vigenereBreaker.breakVigenere3(filePath);
+    }
+
     public static void main(String[] args) {
        /* FileResource fileResource = new FileResource(FILE_PATH);
         StringBuilder textFromFile = new StringBuilder();
@@ -118,7 +125,11 @@ public class Tester {
 
         // test VigenereBreaker2
         // breakVigenere
-        tester.testBreakVigenere2(FILE_PATH);
+//        tester.testBreakVigenere2(FILE_PATH);
+
+        // test VigenereBreaker3
+        // breakVigenere
+        tester.testBreakVigenere3(FILE_PATH);
 
 
     }

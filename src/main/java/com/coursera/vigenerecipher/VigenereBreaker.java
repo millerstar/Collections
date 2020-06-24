@@ -2,11 +2,20 @@ package com.coursera.vigenerecipher;
 
 import com.coursera.edu.duke.FileResource;
 
+import java.awt.*;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class VigenereBreaker {
     private int[] validKey;
     private final String ENGLISH_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/English";
+    private final String DANISH_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/Danish";
+    private final String DUTCH_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/Dutch";
+    private final String FRENCH_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/French";
+    private final String GERMAN_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/German";
+    private final String ITALIAN_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/Italian";
+    private final String PORTUGUESE_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/Portuguese";
+    private final String SPANISH_DICTIONARY_FILE_PATH = "src/main/java/com/coursera/vigenerecipher/dictionaries/Spanish";
 
     public String sliceString(String message, int whichSlice, int totalSlices) {
         //REPLACE WITH YOUR CODE
@@ -58,6 +67,16 @@ public class VigenereBreaker {
         System.out.println(keyAsWord);
     }
 
+    public void breakVigenere3(String filePath) {
+        FileResource fileResourceText = new FileResource(filePath);
+        langList();
+        String testingFile = fileResourceText.asString();
+        breakForAllLangs(testingFile, langList());
+        String keyAsWord = getKeyAsWord();
+        System.out.println("**************");
+//        System.out.println(keyAsWord);
+    }
+
     public HashSet<String> readDictionary(FileResource fr) {
         HashSet<String> dictionaryList = new HashSet<>();
         for (String line : fr.lines()) {
@@ -83,7 +102,7 @@ public class VigenereBreaker {
         int max = 0;
         String perfectDecrypted = null;
         for (int i = 1; i <= 100; i++) {
-            int[] keys = tryKeyLength(encrypted, i, 'e');
+            int[] keys = tryKeyLength(encrypted, i, mostCommonCharIn(dictionary));
             VigenereCipher vigenereCipher = new VigenereCipher(keys);
             String decrypted = vigenereCipher.decrypt(encrypted);
             int wordsCounted = countWords(decrypted, dictionary);
@@ -109,6 +128,75 @@ public class VigenereBreaker {
         }
         System.out.println("And as a word:");
         return keyAsWord.toString();
+    }
+
+    public char mostCommonCharIn(HashSet<String> dictionary) {
+        HashMap<Character, Integer> characterMap = new HashMap<>();
+        char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+                'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        for (int i = 0; i < chars.length; i++) {
+            characterMap.put(chars[i], 0);
+        }
+        for (String word : dictionary) {
+            for (char s : characterMap.keySet()) {
+                if (word.contains(Character.toString(s))) {
+                    characterMap.put(s, characterMap.get(s) + 1);
+                }
+            }
+        }
+        int maxValue = 0;
+        for (char s : characterMap.keySet()) {
+            int currentValue = characterMap.get(s);
+            if (currentValue > maxValue) {
+                maxValue = currentValue;
+            }
+        }
+        for (char s : characterMap.keySet()) {
+            if (characterMap.get(s) == maxValue) {
+                return s;
+            }
+        }
+        return 'a';
+    }
+
+    private HashMap<String, HashSet<String>> langList() {
+        HashMap<String, HashSet<String>> languages = new HashMap<>();
+        FileResource English = new FileResource(ENGLISH_DICTIONARY_FILE_PATH);
+        languages.put("English", readDictionary(English));
+
+        FileResource Danish = new FileResource(DANISH_DICTIONARY_FILE_PATH);
+        languages.put("Danish", readDictionary(Danish));
+
+        FileResource Dutch = new FileResource(DUTCH_DICTIONARY_FILE_PATH);
+        languages.put("Dutch", readDictionary(Dutch));
+
+        FileResource French = new FileResource(FRENCH_DICTIONARY_FILE_PATH);
+        languages.put("French", readDictionary(French));
+
+        FileResource German = new FileResource(GERMAN_DICTIONARY_FILE_PATH);
+        languages.put("German", readDictionary(German));
+
+        FileResource Italian = new FileResource(ITALIAN_DICTIONARY_FILE_PATH);
+        languages.put("Italian", readDictionary(Italian));
+
+        FileResource Portuguese = new FileResource(PORTUGUESE_DICTIONARY_FILE_PATH);
+        languages.put("Portuguese", readDictionary(Portuguese));
+
+        FileResource Spanish = new FileResource(SPANISH_DICTIONARY_FILE_PATH);
+        languages.put("Spanish", readDictionary(Spanish));
+
+        return languages;
+    }
+
+    public void breakForAllLangs(String encrypted, HashMap<String, HashSet<String>> languages) {
+        for (String s : languages.keySet()) {
+            HashSet lang = languages.get(s);
+            String decrypted = breakForLanguage(encrypted, lang);
+            int wordCount = countWords(decrypted, lang);
+            System.out.println("LANGUAGE CHOSEN = " + s);
+            System.out.println("Decrypted message = "+ decrypted);
+            System.out.println("Words counted = "+ wordCount);
+        }
     }
 
 }
