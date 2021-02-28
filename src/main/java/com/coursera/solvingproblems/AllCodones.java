@@ -1,5 +1,7 @@
 package com.coursera.solvingproblems;
 
+import com.coursera.edu.duke.StorageResource;
+
 public class AllCodones {
 
     public int fineStopCodon(String dnaStr, int startIndex, String stopCodon) {
@@ -54,6 +56,20 @@ public class AllCodones {
         }
     }
 
+    public StorageResource getAllGenes(String dna) {
+        StorageResource geneList = new StorageResource();
+        int startIndex = 0;
+        while (true) {
+            String currentGene = findGene(dna, startIndex);
+            if (currentGene == null) {
+                break;
+            }
+            geneList.add(currentGene);
+            startIndex = dna.indexOf(currentGene, startIndex) + currentGene.length();
+        }
+        return geneList;
+    }
+
     public void testFindStop() {
         String dna = "xxxyyyzzzTAAxxxyyyzzzTAAxx";
         int dex = fineStopCodon(dna, 0, "TAA");
@@ -74,7 +90,10 @@ public class AllCodones {
 
     public void testOn(String dna) {
         System.out.println("Testing printAllGenes on '" + dna + "'");
-        printAllGenes(dna);
+        StorageResource genes = getAllGenes(dna);
+        for (String g:genes.data()) {
+            System.out.println(g);
+        }
     }
 
     public void test() {
